@@ -1,0 +1,33 @@
+<h1 class="app-name">{{$root.appConstants.appTitle}}</h1>
+<div class="scrollable">
+  <h1 class="scrollable-header app-name">{{$root.appConstants.appTitle}}</h1>  
+  <div class="scrollable-content">
+    <div class="list-group" ui-turn-off='uiSidebarLeft'>
+      <a class="list-group-item" href="#/">Home <i class="fa fa-chevron-right pull-right"></i></a>
+    </div>
+    <hr>
+    <div class="list-group" ui-turn-off='uiSidebarLeft'>
+      <a class="list-group-item" href="#/encounter-edit"><i class="fa fa-plus" ></i> New encounter <i class="fa fa-chevron-right pull-right"></i></a>
+      <a class="list-group-item" href="#/encounters/my"><i class="fa fa-list" ></i> My encounters <i class="fa fa-chevron-right pull-right"></i></a>
+      <a class="list-group-item" href="#/encounters"><i class="fa fa-list" ></i> Encounters <i class="fa fa-chevron-right pull-right"></i></a>
+        
+    </div>
+    
+    <div class="list-group" ui-turn-off='uiSidebarLeft'>
+      <a class="list-group-item" href="#/themes"><i class="fa fa-eye" ></i> Themes <i class="fa fa-chevron-right pull-right"></i></a>
+      <a class="list-group-item" href="#/tags"><i class="fa fa-tags" ></i> Tags <i class="fa fa-chevron-right pull-right"></i></a>
+    </div>
+      
+    <div ng-show="$root.me.IS_ADMIN" class="list-group" ui-turn-off='uiSidebarLeft'>
+      <a class="list-group-item" href="#/approval-list">
+          <i class="fa fa-check" ></i><i class="fa fa-close" ></i> encounter approval <i class="fa fa-chevron-right pull-right"></i></a>
+      
+    </div>
+      
+    
+  </div>
+  <div class="scrollable-footer">
+    <p>User: {{$root.me.displayName}} ({{$root.me.umanPersonID}})</p>
+  </div> 
+    
+</div>

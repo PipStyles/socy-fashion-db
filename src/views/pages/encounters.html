@@ -1,0 +1,53 @@
+<div class="scrollable" >
+    <div class="section scrollable-header" ui-turn-on="modal_filter_encounters" >
+        <h2>{{my}}Encounters ({{encounters.total_items}}) <i class="fa fa-filter" ></i></h2>
+        <p ng-if="theme" ><strong>theme:</strong> {{theme.theme_name}}</p>
+        <p ng-if="tag" ><strong>tag:</strong> {{tag.tag_name}}</p>
+        <p ng-if="encounters.length == 0" >No encounters found</p>
+         <p ng-if="encounters.length" >Key:
+             <span><i class="fa fa-file-picture-o" ></i> images approved/total</span> |
+             <span class="list-group-item-info" > last viewed </span>
+      </p>
+    </div>
+    <div class="section scrollable-content">
+
+          <ul class="list-encounters list-group" >
+            <li ng-class="{'list-group-item-info':prevHash == 'encounter_'+encounter.encounter_id}"
+
+                ng-swipe-left="itemSwiped(encounter)"
+                ng-swipe-right="itemUnswiped(encounter)"
+                dir-paginate="encounter in encounters | itemsPerPage: 25 | filter:filterItem"
+                current-page="pageNum"
+                total-items="encounters.total_items"
+                current-page="pageNum"
+                eeexpression="filter:filterItem" 
+                class="list-group-item" >
+
+                <h4 ng-click="loadEncounter(encounter.encounter_id)" ><a id="encounter_{{encounter.encounter_id}}" name="encounter_{{encounter.encounter_id}}" ></a>{{encounter.title}}</h4>
+
+                <div class="item-subline text-muted" ng-click="loadEncounter(encounter.encounter_id)" >
+                  <span><i class="fa fa-user" ></i> {{encounter.owner_name}} ({{encounter.user_cohort}}-{{(encounter.user_cohort - 1999)}})</span>
+                  <span ng-show="encounter.count_images > 0" ><i class="fa fa-file-picture-o" ></i> {{encounter.approved_images}}/{{encounter.count_images}}</span>
+                </div>
+
+                <button ng-if="encounter.owner_id == $root.me.UID || $root.me.IS_ADMIN"
+                        ng-show="encounter.SHOW_DELETE"
+                        ng-click="checkDelete(encounter)"
+                        ui-turn-on="modal_delete_encounter"
+                        class="button-delete" style="z-index:999;" > delete </button>
+
+              </li>
+          </ul>
+
+    </div>
+
+    <div class="section scrollable-footer">
+        <dir-pagination-controls class="text-center" max-size="8" boundary-link="true" direction-links="false" on-page-change="pageChanged(newPageNumber)" current-page="pageNum" ></dir-pagination-controls>
+    </div>
+
+</div>
+
+<div ui-content-for="modals" >
+   <div ng-include="'views/modals/encounters-confirm-delete.html'" ></div>
+   <div ng-include="'views/modals/encounters-filter.html'" ></div>
+</div>

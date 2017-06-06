@@ -1,0 +1,56 @@
+<div class="modal" ui-if='modal_add_image' ui-state='modal_add_image' >
+    <div class="modal-backdrop in"></div>
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button class="close" 
+                  ui-turn-off="modal_add_image">&times;</button>
+          <h4 class="modal-title">Add images</h4>
+        </div>
+          
+        <div class="modal-body">
+            
+            <label for="image-upload" >Upload existing (multiple):</label>
+            <input class="btn btn-success btn-block" id="image-upload" type="file" 
+                    ng-file-select 
+                    ng-accept="'image/*'" 
+                    ng-multiple="true" 
+                    ng-file-change="upload($files)" >
+            
+            <hr>
+            
+            <label for="image-capture" >Choose or take with camera:</label>
+            <input class="btn btn-success btn-block" id="image-capture" type="file" 
+                    ng-file-select 
+                    ng-accept="'image/*'" 
+                    ng-capture="'camera'" 
+                    ng-multiple="false" 
+                    ng-file-change="upload($files)" >
+            
+            
+            
+            <div ng-show="files.length" >
+             <ul class="list-group" >
+                 <li class="list-group-item" ng-repeat="f in files" >
+                     {{f.name}}
+                 </li>
+             </ul>
+            
+                
+            </div>
+            <hr>
+            <p ng-show="progress_message" ><i class="fa fa-info" ></i>{{progress_message}}</p>
+            
+            <div ng-show="encounter.images.length" >
+            <hr>
+            <button ui-turn-off="modal_add_image" ui-turn-on="modal_manage_images" class="button-list"> manage images</button>
+            </div>
+            
+            
+        </div>
+        <div class="modal-footer">
+          <button ui-turn-off="modal_add_image" class="button-close">Close</button>
+        </div>
+      </div>
+    </div>
+</div>

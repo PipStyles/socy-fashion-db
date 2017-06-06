@@ -1,0 +1,50 @@
+<div class="modal" ui-if='modal_manage_images' ui-state='modal_manage_images' style="position: absolute;" >
+    <div class="modal-backdrop in"></div>
+    <div class="modal-dialog ">
+      <div class="modal-content" >
+        
+        <div class="modal-header">
+          <button class="close" ui-turn-off="modal_manage_images">&times;</button>
+          <h4 class="modal-title">manage images:</h4>
+        </div>
+          
+          
+        <div class="modal-body" style="min-height:400px; overflow-y: auto;" >
+  
+
+            <div ng-repeat="image in encounter.images" style="margin-bottom:1em;" >                               
+                <img ng-src="i/{{encounter.encounter_id}}/{{image.image_filename}}" >
+                 <p>Detail: {{image.image_detail}}</p>
+                <button class="btn btn-primary" ng-click="initEditImage(image)" ui-turn-off="modal_manage_images" ui-turn-on="modal_edit_image" ><i class="fa fa-edit" ></i> edit</button> 
+                
+                <button class="btn btn-danger" 
+                        ng-init="image._confirm_delete = false" 
+                        ng-hide="image._confirm_delete" 
+                        ng-click="image._confirm_delete = true" >
+                    <i class="fa fa-trash" ></i>
+                </button>
+              
+                <button class="btn btn-success" 
+                        ng-show="image._confirm_delete" 
+                        ng-click="image._confirm_delete = false" >
+                    <i class="fa fa-close" ></i>keep
+                </button>
+                
+                <button class="btn btn-danger" 
+                        ng-show="image._confirm_delete" 
+                        ng-click="deleteImage(image)" >
+                    <i class="fa fa-trash" ></i>confirm
+                </button>
+                <hr>
+              </div>
+            
+            <ng-include src="'views/partials/asset-save-warn.html'" ></ng-include>
+            
+            <button  ui-turn-off="modal_manage_images" class="button-close" >close</button>
+
+        </div>
+          
+        <div class="modal-footer"></div>
+      </div>
+    </div>
+</div>

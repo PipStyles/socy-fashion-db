@@ -1,0 +1,21 @@
+<div class="modal" ui-if='modal_ea' ui-state='modal_ea' >
+    <div class="modal-backdrop in"></div>
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button class="close" 
+                  ui-turn-off="modal_ea">&times;</button>
+          <h4 class="modal-title">Subject agreement</h4>
+        </div>
+        <div class="modal-body">
+            <p class="text-muted" >Show this to the subject, then ask them to tap <strong>I agree</strong></p>
+            <hr>
+          <p>&quot;I consent to my image being used by students and staff on the Sociology of Fashion course for teaching purposes and student research projects. I understand that my image will be stored on a database viewable only by students enrolled on the course and that it will be stored there for as long as the course runs. I understand that I have the right to request that my information is withdrawn at any point.&quot;</p>
+        </div>
+        <div class="modal-footer">
+          <button ui-turn-off="modal_ea" class="button-cancel">Cancel</button>
+          <button ui-turn-off="modal_ea" ng-click='encounter.subject_agreement = "1"' class="button-save">I agree</button>
+        </div>
+      </div>
+    </div>
+</div>

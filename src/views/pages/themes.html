@@ -1,0 +1,14 @@
+
+<div class="scrollable" >
+  <div class="section scrollable-header">
+      <h2>Themes</h2>
+  </div>
+  <div class="section scrollable-content">
+  <ul class="list-group" >
+    <li class="list-group-item" ng-class="{'disabled':theme.count_encounters == 0}" ng-repeat="theme in themes" ng-click="goEncounters(theme.theme_id)" >{{theme.theme_name}} 
+      <i class="fa fa-list" > {{theme.count_encounters}}</i>
+      <i class="fa fa-file-image-o" > {{theme.count_approved_images}}</i>
+    </li>
+  </ul>
+  </div>
+</div>

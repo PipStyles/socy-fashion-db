@@ -1,0 +1,20 @@
+<div class="scrollable" >
+    <div class="section scrollable-header">
+         <h2>{{my}}Encounters</h2>
+        <p><span><i class="fa fa-file-picture-o" ></i> images approved/total</span></p>
+        <div ng-if="encounters.page_count > 1" >
+        Pages: 
+        </div>
+    </div>
+    <div class="section scrollable-content">
+        
+          <ul class="list-group" >
+            <li ng-click="loadEncounter(encounter.encounter_id)" ng-repeat="encounter in encounters" class="list-group-item" >
+                <h4>{{encounter.title}}</h4>
+                <span class="text-muted" ><i class="fa fa-user" ></i> {{encounter.owner_name}}</span>
+                <span ng-show="encounter.count_images > 0" ><i class="fa fa-file-picture-o" ></i> {{encounter.approved_images}}/{{encounter.count_images}}</span>
+              </li>
+          </ul>
+        
+    </div>
+</div>

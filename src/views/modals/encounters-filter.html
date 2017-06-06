@@ -1,0 +1,34 @@
+<div class="modal" ui-if='modal_filter_encounters' ui-state='modal_filter_encounters' style="position: absolute;" >
+    <div class="modal-backdrop in"></div>
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button class="close" ui-turn-off="modal_filter_encounters">&times;</button>
+          <h4 class="modal-title">Filter Encounters:</h4>
+        </div>
+        <div class="modal-body" >
+            <h4>Cohorts:</h4>
+            <div class="btn-group" >
+              <label class="btn btn-primary"
+                  ng-class="{'active': filter.cohorts[cohort]}"
+                  ng-click="filter.cohorts[cohort] = !filter.cohorts[cohort]"
+                  ng-repeat="(cohort,state) in filter.cohorts" >
+                {{cohort}}-{{(cohort-1999)}}
+              </label>
+            </div>
+            <hr>
+            <h4>Images:</h4>
+            <div>
+              <label class="btn btn-primary" ng-click="filter.hasApprovedImages = !filter.hasApprovedImages" ng-class="{'active': filter.hasApprovedImages}" >
+                Has approved images
+              </label>
+            </div>
+            <hr>
+            <button ng-click="clearFilters()" class="button-close" >Reset filters</button>
+        </div>
+        <div class="modal-footer">
+          <button ui-turn-off="modal_filter_encounters" class="button-close" >Ok</button>
+        </div>
+      </div>
+    </div>
+</div>

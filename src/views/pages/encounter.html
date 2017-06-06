@@ -1,0 +1,56 @@
+<div class="scrollable" >
+    <div class="section scrollable-header">
+         <h3>
+             <button class="btn btn-primary" ng-click="backToList()" >
+                <i class="fa fa-caret-left" ></i>
+             </button> {{encounter.title}}
+         </h3>
+    </div>
+    
+<div class="section scrollable-content">
+        
+        <p><strong>Author:</strong> {{encounter.owner_name}}</p>
+        <p><strong>Look:</strong> {{encounter.look}}</p>
+        <p><strong>Theme:</strong> <span ng-click="goTheme(encounter.theme_id)" class="label label-primary"  >{{encounter.theme_name}}</span></p>
+        <p><strong>Tags:</strong>
+           <span ng-repeat="tag in encounter.tags" ng-click="goTag(tag.tag_id)" class="label label-info" >{{tag.tag_name}} &nbsp;</span> &nbsp;
+        </p>
+        
+      <div ng-show="encounter.subject" >
+        <hr>
+        <h3>Subject:</h3>
+          <p><strong>Email:</strong> {{encounter.subject.subject_email}}</p>
+          <p><strong>Name:</strong> {{encounter.subject.subject_firstname}} {{encounter.subject.subject_lastname}}</p>
+          <p><strong>Tel:</strong> {{encounter.subject.subject_telephone}}</p>
+        </div>
+
+       <div ng-show="encounter.clothing" >
+          <hr>
+          <h3>Clothing:</h3>
+          <ul class="list-group" >
+            <li class="list-group-item" ng-repeat="clothing in encounter.clothing" >
+                <p><strong>Item:</strong> {{clothing.clothing_item}}</p>
+                <p><strong>Months owned:</strong> {{clothing.clothing_months_owned}}</p>
+                <p><strong>Origin:</strong> {{clothing.clothing_origin}}</p>
+                <p><strong>Designer:</strong> {{clothing.clothing_designer}}</p>
+              </li>
+            </ul>
+        </div>
+
+        <div ng-show="encounter.images" >
+        <hr>
+        <h3>Images:</h3>
+        <ul class="list-group" >
+          <li class="list-group-item" ng-repeat="image in encounter.images" >
+              <img ng-if="image.image_filename" ng-src="i/{{encounter.encounter_id}}/{{image.image_filename}}" >
+              <p>{{image.image_detail}}</p>
+            </li>
+        </ul>
+        </div>
+    
+        <div ng-if="($root.me.UID == encounter.owner_id) || $root.me.IS_ADMIN" >
+          <button class="btn btn-block btn-primary" ng-click="edit()" ><i class="fa fa-edit" ></i> edit</button> 
+        </div>
+        
+    </div>
+</div>

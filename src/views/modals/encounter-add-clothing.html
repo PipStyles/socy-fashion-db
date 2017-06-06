@@ -1,0 +1,46 @@
+<div class="modal" ui-if='modal_add_clothing' ui-state='modal_add_clothing' >
+    <div class="modal-backdrop in"></div>
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button class="close" ui-turn-off="modal_add_clothing">&times;</button>
+          <h4 class="modal-title">Add/edit clothing:</h4>
+        </div>
+        <div class="modal-body">
+            
+            <form>
+             <div class="form-group" >
+                  <label for="clothing_item" >Item:</label>
+                  <input class="form-control" type="text" id="clothing_item" ng-model="newclothing.clothing_item" >
+                  
+                 <label for="clothing_months_owned" >Months owned:</label>
+                  <input class="form-control" type="number" id="clothing_months_owned" ng-model="newclothing.clothing_months_owned" >
+                 
+                 <label for="clothing_origin" >Origin:</label>
+                  <input class="form-control" type="text" id="clothing_origin" ng-model="newclothing.clothing_origin" >
+                 
+                 <label for="clothing_designer" >Designer:</label>
+                  <input class="form-control" type="text" id="clothing_designer" ng-model="newclothing.clothing_designer" >
+                 
+                 <input ng-if="clothing.clothing_id" type="hidden" ng-model="clothing.clothing_id" >
+                 
+              </div>
+                
+            </form>
+            <hr>
+            
+            <ng-include src="'views/partials/asset-save-warn.html'" ></ng-include>
+            
+            <button ui-turn-off="modal_add_clothing" class="button-save" ng-click="saveClothing(newclothing)" >Save and close</button> 
+          <button ui-turn-off="modal_add_clothing" class="button-cancel" >Cancel</button>
+            
+        </div>
+          
+        <div class="modal-footer">
+            
+            
+        </div>
+          
+      </div>
+    </div>
+</div>

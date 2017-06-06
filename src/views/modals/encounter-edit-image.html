@@ -1,0 +1,51 @@
+<div class="modal modal-overlay" ui-if='modal_edit_image' ui-state='modal_edit_image' >
+    <div class="modal-backdrop in"></div>
+    <div class="modal-dialog ">
+      <div class="modal-content" >
+        
+        <div class="modal-header">
+          <button class="close" ui-turn-off="modal_edit_image">&times;</button>
+          <h4 class="modal-title">edit image:</h4>
+        </div>
+          
+          
+        <div class="modal-body" >
+                <img ng-src="i/{{encounter.encounter_id}}/{{editimage.image_filename}}" >
+                 <hr>
+                <label for="image_detail" >Detail:</label>
+                <input class="form-control" id="image_detail" type="text" ng-model="editimage.image_detail" > 
+                <hr>
+                
+                <button class="btn btn-primary" ng-click="saveEditImage(editimage)" ui-turn-off="modal_edit_image" ui-turn-on="modal_manage_images">
+                    <i class="fa fa-check" ></i> save
+                </button>
+                
+                <button class="btn btn-warning" 
+                        ng-init="editimage._confirm_delete = false" 
+                        ng-hide="editimage._confirm_delete" 
+                        ng-click="editimage._confirm_delete = true" >
+                    <i class="fa fa-trash" ></i> delete
+                </button>
+                
+                <button class="btn btn-success" 
+                        ng-show="editimage._confirm_delete" 
+                        ng-click="editimage._confirm_delete = false" >
+                    <i class="fa fa-close" ></i> cancel
+                </button>
+                  
+                <button ng-show="editimage._confirm_delete" class="btn btn-danger" ng-click="deleteImage(editimage)" ui-turn-off="modal_edit_image" ><i class="fa fa-trash" ></i> confirm</button>
+
+             
+                <hr>
+            
+            <ng-include src="'views/partials/asset-save-warn.html'" ></ng-include>
+                
+                <hr>
+            <button  ui-turn-off="modal_edit_image" class="button-close" >close</button>
+              
+        </div>
+          
+        <div class="modal-footer"></div>
+      </div>
+    </div>
+</div>

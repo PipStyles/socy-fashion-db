@@ -1,0 +1,138 @@
+<div class="scrollable" >
+    <div class="section scrollable-header">
+         <h3><back-button></back-button>
+             {{action}} encounter</h3>
+    </div>
+    <div class="section scrollable-content">
+    <form>
+      <div class="form-group">
+        <label for="encounter_title">Encounter title:</label>
+        <input required ng-model="encounter.title" type="text" class="form-control" id="encounter_title" placeholder="title">
+      </div>
+
+      <div class="form-group">
+
+         <!--<label for="subject_email" >Subject email:</label>
+        <autocomplete
+              data="subject_emails"
+              ng-model="encounter.subject.subject_email"
+on-select="setSubjectByEmail()"
+              ng-blur="updateSubject()" ></autocomplete> -->
+
+          <label for="subject_email" >Subject email:</label>
+          <input required class="form-control" type="email" style="text-transform: lowercase;" id="subject_email" ng-blur="subjectEmailBlur()" ng-model="encounter.subject.subject_email" >
+
+
+        <p class="text-muted"
+           ng-hide="subject_fields"
+           ng-init="subject_fields = true" ><i class="fa fa-info-circle" ></i> existing subject - edit below if required</p>
+
+       <div>
+
+        <label for="subject_firstname">Subject first name:</label>
+        <input ng-model="encounter.subject.subject_firstname" type="text" class="form-control" id="subject_firstname" placeholder="first name">
+
+        <label for="subject_lastname">Subject last name:</label>
+        <input ng-model="encounter.subject.subject_lastname" type="text" class="form-control" id="subject_lastname" placeholder="last name">
+
+         <label for="subject_tel">Subject telephone <em>(optional)</em>:</label>
+        <input ng-model="encounter.subject.subject_tel" type="text" class="form-control" id="subject_tel" placeholder="telephone (optional)">
+        </div>
+     </div>
+
+     <div class="form-group">
+        <label for="encounter_look" >Look:</label>
+        <input ng-focus="updateSubject()" ng-model="encounter.look" type="text" class="form-control" id="encounter_look" placeholder="description of the look" >
+      </div>
+
+      <div class="form-group">
+        <label for="encounter_look" >Theme: <button ui-turn-on="modal_add_theme" class="btn" ><i class="fa fa-plus" ></i>      </button></label>
+
+          <select ng-change="egg()" class="form-control" ng-model="encounter.theme_id"
+                  ng-options="theme.theme_id as theme.theme_name for theme in themes" >
+          </select>
+
+      </div>
+
+      <div class="form-group" >
+          <label>Tags (max 5): <span ng-show="encounter.tags.length > 5" >(max 5, remove some)</span></label>
+          <tags-input max-tags="5" ng-model="encounter.tags" display-property="tag_name" on-tag-added="addTag($tag)" >
+            <auto-complete ng-if="all_tags.length" min-length="3" source="getFilteredTags($query)" maxResultsToShow="5" ></auto-complete>
+          </tags-input>
+      </div>
+
+      <div>
+        <h4>Clothing ({{encounter.clothing.length}})
+        <button ui-turn-on="modal_add_clothing" ng-click="initAddClothing()" class="btn" >
+          <i class="fa fa-plus" ></i>
+        </button>
+          <button ng-show="encounter.clothing.length" class="btn" ui-turn-on="modal_manage_clothing" >
+              <i class="fa fa-list"></i> Manage
+          </button>
+        </h4>
+        <p class="text-muted" ng-hide="encounter.clothing.length" ><i class="fa fa-info" ></i> Consider adding some clothing</p>
+       </div>
+
+        <hr>
+
+        <div ng-hide="encounter.encounter_id" >
+          <p class="text-muted"><i class="fa fa-info" ></i> Save the encounter to add images</p>
+        </div>
+
+        <div ng-show="encounter.encounter_id && encounter.subject_agreement" >
+            <h4>Images ({{encounter.images.length}})
+            <button class="btn" ui-turn-on="modal_add_image" ><i class="fa fa-camera"></i></button>
+              <button class="btn" ng-show="encounter.images.length" ui-turn-on="modal_manage_images" >
+                  <i class="fa fa-list"></i> Manage
+              </button>
+            </h4>
+        </div>
+
+      <div ng-hide="encounter.subject_agreement" >
+            <button class="btn btn-block" ui-turn-on="modal_ea" >Show the subject agreement statement</button>
+        </div>
+
+      <div ng-show="encounter.subject_agreement" class="checkbox">
+        <label>
+          <input type="checkbox"
+                 ng-checked="encounter.subject_agreement"
+                 ng-model="encounter.subject_agreement"
+                 ng-true-value="1" ng-false-value="0" >
+            Subject allows these images to be used</label>
+      </div>
+
+      <div ng-hide="isSaveableEncounter()" >
+      <hr>
+      <i class="fa fa-info" ></i>Provide at least a <strong>title</strong> (3 characters or longer), <strong>subject email</strong> and show/agree the <strong>subject agreement statement</strong> in order to save this Encounter
+      <hr>
+      </div>
+
+      <button ng-show="isSaveableEncounter()" type="submit" class="button-save" ng-click="save()" >Save</button>
+      <hr>
+
+        <div ng-show="encounter.encounter_id" >
+            <button class="button-delete" ng-hide="encounter._todelete" ng-init="encounter._todelete = false" ng-click="encounter._todelete = true" >delete</button>
+            <button class="button-cancel" ng-show="encounter._todelete"  ng-click="encounter._todelete = false" >keep</button>
+            <button class="button-delete" ng-show="encounter._todelete" ng-click="delete()" >confirm</button>
+        </div>
+
+    </form>
+
+       <!-- <div>{{encounter.plain() | json}}</div> -->
+
+    </div>
+</div>
+
+<div ui-content-for="modals" >
+     <div ng-include="'views/modals/encounter-agreement.html'" ></div>
+
+     <div ng-include="'views/modals/encounter-add-images.html'" ></div>
+     <div ng-include="'views/modals/encounter-manage-images.html'" ></div>
+     <div ng-include="'views/modals/encounter-edit-image.html'" >
+</div>
+     <div ng-include="'views/modals/encounter-add-theme.html'" ></div>
+    <ng-include src="'views/modals/encounter-add-clothing.html'" ></ng-include>
+    <div ng-include="'views/modals/encounter-manage-clothing.html'" >
+</div>
+
+</div>

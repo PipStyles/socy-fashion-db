@@ -1,0 +1,20 @@
+<div class="scrollable" >
+    <div class="section scrollable-header">
+        <h3>Approval: {{encounter.title}}</h3>
+        <p>Author: {{encounter.owner_name}}</p>
+        <hr>
+    </div>
+    <div class="section scrollable-content" >
+   
+    
+        <div ng-repeat="image in images"  >
+          <img ng-click="toggleApproved(image)" ng-class="image.approved == 1 ? 'approved':'not-approved'" src="i/{{encounter.encounter_id}}/{{image.image_filename}}" >
+        </div>
+
+    <hr>
+        
+        <button class="button-list" ng-click="approveSet()" >Approve/unapprove images</button>
+        <button class="button-save" ng-click="approveAll()" >Approve all</button>
+        
+    </div>
+</div>

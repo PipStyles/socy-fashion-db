@@ -1,0 +1,41 @@
+<div class="modal" ui-if='modal_manage_clothing' ui-state='modal_manage_clothing' style="position: absolute;" >
+    <div class="modal-backdrop in"></div>
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button class="close" ui-turn-off="modal_manage_clothing">&times;</button>
+          <h4 class="modal-title">Manage clothing:</h4>
+        </div>
+        <div class="modal-body" style="min-height:400px; overflow-y: auto;" >
+            
+              <div ng-repeat="clothing in encounter.clothing" >                           <p>Item: {{clothing.clothing_item}}</p>
+                <p>Months owned: {{clothing.clothing_months_owned}}</p>
+                <p>Origin: {{clothing.clothing_origin}}</p>
+                <p>Designer: {{clothing.clothing_designer}}</p>
+                  
+                <button class="btn btn-primary" ng-click="initEditClothing(clothing)" ui-turn-off="modal_manage_clothing" ui-turn-on="modal_add_clothing" >edit</button> 
+                <button class="btn btn-danger" 
+                        ng-init="clothing._confirm_delete = false" 
+                        ng-hide="clothing._confirm_delete" 
+                        ng-click="clothing._confirm_delete = true" >
+                    <i class="fa fa-trash" ></i>
+                </button>
+                <button class="btn btn-success" 
+                        ng-show="clothing._confirm_delete" 
+                        ng-click="clothing._confirm_delete = false" >
+                    <i class="fa fa-close" ></i>keep
+                </button>
+                  
+                <button ng-show="clothing._confirm_delete" class="btn btn-danger" ng-click="deleteClothing(clothing)" >
+                 <i class="fa fa-trash" ></i>confirm</button>
+                  <hr>
+              </div>
+             
+            <ng-include src="'views/partials/asset-save-warn.html'" ></ng-include>
+            
+            <button  ui-turn-off="modal_manage_clothing" class="button-close" >close</button>
+        </div>
+        <div class="modal-footer"></div>
+      </div>
+    </div>
+</div>
